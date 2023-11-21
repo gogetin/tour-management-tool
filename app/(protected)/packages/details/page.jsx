@@ -19,10 +19,13 @@ import {
   Button,
 } from "@mui/material";
 import { useForm, useFieldArray } from "react-hook-form";
+import HotelForm from "@/components/packageDetails/HotelForm";
+import TransportForm from "@/components/packageDetails/TransportForm";
 
 function Page() {
   function handleAddHotel() {
     append({
+      type: "hotel",
       name: "",
       address: "",
       checkin: "",
@@ -31,7 +34,12 @@ function Page() {
       sellPrice: 0,
     });
   }
-  function handleAddTransport() {}
+  function handleAddTransport() {
+    append({
+      type: "transport",
+      transportDetails: "",
+    });
+  }
   function handleRemove(e) {
     let id = parseInt(e.target.dataset.id);
     console.log(id);
@@ -42,7 +50,10 @@ function Page() {
       icon: <HotelIcon onClick={handleAddHotel} />,
       name: "Add Hotel",
     },
-    { icon: <AirportShuttleIcon />, name: "Add Transport" },
+    {
+      icon: <AirportShuttleIcon onClick={handleAddTransport} />,
+      name: "Add Transport",
+    },
     { icon: <AttractionsIcon />, name: "Add Attraction" },
   ];
   const { register, control, handleSubmit } = useForm({
@@ -86,82 +97,25 @@ function Page() {
           bgcolor={"#eff5ff"}
         >
           <form onSubmit={handleSubmit(onSubmit)}>
-            {fields.map((group, groupIndex) => (
-              <Box
-                key={group.id}
-                style={{ height: "100%" }}
-                display={"flex"}
-                flexDirection={"column"}
-                marginBottom={5}
-              >
-                <Paper>
-                  <Box
-                    bgcolor={"#e8eef1"}
-                    display={"flex"}
-                    alignItems={"center"}
-                    justifyContent={"space-between"}
-                    padding={1}
-                  >
-                    <Typography>Hotel</Typography>
-                    <Button
-                      color="error"
-                      data-id={groupIndex}
-                      onClick={handleRemove}
-                    >
-                      Remove
-                    </Button>
-                  </Box>
-                  <Box
-                    display={"flex"}
-                    flexDirection={"column"}
-                    alignContent={"center"}
-                    rowGap={2}
-                    padding={4}
-                  >
-                    <TextField
-                      label="Hotel Name"
-                      {...register(`groups[${groupIndex}].name`)}
-                      defaultValue={group.firstName}
-                      placeholder="Hotel Name"
-                      size="small"
-                    />
-                    <TextField
-                      {...register(`groups[${groupIndex}].address`)}
-                      defaultValue={group.address}
-                      placeholder="Hotel Address"
-                      size="small"
-                    />
-                    <TextField
-                      {...register(`groups[${groupIndex}].checkin`)}
-                      defaultValue={group.checkin}
-                      placeholder="Checkin Date"
-                      size="small"
-                    />
-                    <TextField
-                      {...register(`groups[${groupIndex}].checkout`)}
-                      defaultValue={group.checkin}
-                      placeholder="Checkout Date"
-                      size="small"
-                    />
-                    <TextField
-                      {...register(`groups[${groupIndex}].sellPrice`)}
-                      defaultValue={group.checkin}
-                      placeholder="Sell Price"
-                      size="small"
-                    />
-                    <TextField
-                      {...register(`groups[${groupIndex}].purchasePrice`)}
-                      defaultValue={group.checkin}
-                      placeholder="Purchase Price"
-                      size="small"
-                    />
-                    <Button size="small" variant="contained" type="button">
-                      Save
-                    </Button>
-                  </Box>
-                </Paper>
-              </Box>
-            ))}
+            {fields.map(
+              (group, groupIndex) =>
+                (group.type === "hotel" && (
+                  <HotelForm
+                    register={register}
+                    groupIndex={groupIndex}
+                    handleRemove={handleRemove}
+                    group={group}
+                  />
+                )) ||
+                (group.type === "transport" && (
+                  <TransportForm
+                    register={register}
+                    groupIndex={groupIndex}
+                    handleRemove={handleRemove}
+                    group={group}
+                  />
+                ))
+            )}
           </form>
         </Box>
       </Box>
