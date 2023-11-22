@@ -5,19 +5,8 @@ import React from "react";
 import { Paper, TextField, Typography, Box, IconButton } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
-import SaveIcon from "@mui/icons-material/Save";
-import PrintIcon from "@mui/icons-material/Print";
-import ShareIcon from "@mui/icons-material/Share";
 
 function layout({ children }) {
-  const actions = [
-    {
-      icon: <SaveIcon />,
-      name: "Add Hotel",
-    },
-    { icon: <PrintIcon />, name: "Print" },
-    { icon: <ShareIcon />, name: "Share" },
-  ];
   return (
     <Container disableGutters={true} maxWidth={"100vw"} sx={{ padding: 0 }}>
       <Box>
