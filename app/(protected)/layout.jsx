@@ -21,7 +21,7 @@ function layout({ children }) {
   return (
     <Container disableGutters={true} maxWidth={"100vw"} sx={{ padding: 0 }}>
       <Box>
-        <AppBar position="static">
+        <AppBar>
           <Toolbar>
             <IconButton
               size="large"

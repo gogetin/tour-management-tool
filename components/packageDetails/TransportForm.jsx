@@ -27,6 +27,20 @@ export default function TransportForm({
     { label: "Schindler's List", year: 1993 },
     { label: "Pulp Fiction", year: 1994 },
   ];
+  const seater = [
+    {
+      label: "12",
+      value: 12,
+    },
+    {
+      label: "14",
+      value: 12,
+    },
+    {
+      label: "16",
+      value: 12,
+    },
+  ];
   return (
     <>
       <Box
@@ -70,7 +84,38 @@ export default function TransportForm({
                 />
               )}
             />
-
+            <Autocomplete
+              disablePortal
+              id=""
+              options={seater}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  size="small"
+                  label="Seater"
+                  placeholder="Seater"
+                  {...register(`group[${groupIndex}].seater`)}
+                />
+              )}
+            />
+            <TextField
+              size="small"
+              label="No. of Cars"
+              placeholder="No. of Cars"
+              {...register(`group[${groupIndex}].numberOfCard`)}
+            />
+            <TextField
+              size="small"
+              label="Sell Price"
+              placeholder="Sell Price"
+              {...register(`group[${groupIndex}].sellPrice`)}
+            />
+            <TextField
+              size="small"
+              label="Purchase Price"
+              placeholder="Purchase Price"
+              {...register(`group[${groupIndex}].purchasePrice`)}
+            />
             <Button size="small" variant="contained" type="button">
               Save
             </Button>

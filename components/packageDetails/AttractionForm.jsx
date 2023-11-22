@@ -8,14 +8,24 @@ import {
   CardActionArea,
   CardActions,
   Button,
+  Autocomplete,
 } from "@mui/material";
-export default function HotelForm({
+export default function AttractionForm({
   register,
   groupIndex,
   handleRemove,
   id,
   group,
 }) {
+  const top100Films = [
+    { label: "The Shawshank Redemption", year: 1994 },
+    { label: "The Godfather", year: 1972 },
+    { label: "The Godfather: Part II", year: 1974 },
+    { label: "The Dark Knight", year: 2008 },
+    { label: "12 Angry Men", year: 1957 },
+    { label: "Schindler's List", year: 1993 },
+    { label: "Pulp Fiction", year: 1994 },
+  ];
   return (
     <Box
       key={id}
@@ -32,7 +42,7 @@ export default function HotelForm({
           justifyContent={"space-between"}
           padding={1}
         >
-          <Typography>Hotel</Typography>
+          <Typography>Attraction</Typography>
           <Button color="error" data-id={groupIndex} onClick={handleRemove}>
             Remove
           </Button>
@@ -44,34 +54,35 @@ export default function HotelForm({
           rowGap={2}
           padding={4}
         >
-          <TextField
-            label="Hotel Name"
-            {...register(`groups[${groupIndex}].name`)}
-            defaultValue={group.firstName}
-            placeholder="Hotel Name"
-            size="small"
+          <Autocomplete
+            disablePortal
+            id=""
+            options={top100Films}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                size="small"
+                label="Attraction Details"
+                placeholder="Attraction Details"
+                {...register(`group[${groupIndex}].attractionDetails`)}
+              />
+            )}
           />
           <TextField
-            label="Hotel Address"
-            {...register(`groups[${groupIndex}].address`)}
+            label="No. of Adults"
+            {...register(`groups[${groupIndex}].adults`)}
             defaultValue={group.address}
-            placeholder="Hotel Address"
+            placeholder="No. of Adults"
             size="small"
           />
           <TextField
-            label="Check in Date"
-            {...register(`groups[${groupIndex}].checkin`)}
+            label="No. of Children"
+            {...register(`groups[${groupIndex}].children`)}
             defaultValue={group.checkin}
-            placeholder="Checkin Date"
+            placeholder="No. of Children"
             size="small"
           />
-          <TextField
-            label="Check out Date"
-            {...register(`groups[${groupIndex}].checkout`)}
-            defaultValue={group.checkin}
-            placeholder="Checkout Date"
-            size="small"
-          />
+
           <TextField
             label="Sell Price"
             {...register(`groups[${groupIndex}].sellPrice`)}

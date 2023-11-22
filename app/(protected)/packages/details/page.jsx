@@ -17,10 +17,12 @@ import {
   CardActionArea,
   CardActions,
   Button,
+  Stack,
 } from "@mui/material";
 import { useForm, useFieldArray } from "react-hook-form";
 import HotelForm from "@/components/packageDetails/HotelForm";
 import TransportForm from "@/components/packageDetails/TransportForm";
+import AttractionForm from "@/components/packageDetails/AttractionForm";
 
 function Page() {
   function handleAddHotel() {
@@ -38,6 +40,20 @@ function Page() {
     append({
       type: "transport",
       transportDetails: "",
+      seater: "",
+      numberOfcars: "",
+      purchasePrice: "",
+      sellPrice: "",
+    });
+  }
+  function handleAddAttraction() {
+    append({
+      type: "attraction",
+      attractionDetails: "",
+      adults: "",
+      children: "",
+      purchasePrice: "",
+      sellPrice: "",
     });
   }
   function handleRemove(e) {
@@ -45,17 +61,7 @@ function Page() {
     console.log(id);
     remove(id);
   }
-  const actions = [
-    {
-      icon: <HotelIcon onClick={handleAddHotel} />,
-      name: "Add Hotel",
-    },
-    {
-      icon: <AirportShuttleIcon onClick={handleAddTransport} />,
-      name: "Add Transport",
-    },
-    { icon: <AttractionsIcon />, name: "Add Attraction" },
-  ];
+
   const { register, control, handleSubmit } = useForm({
     defaultValues: {
       groups: [],
@@ -72,29 +78,69 @@ function Page() {
   };
   return (
     <>
-      <Box display={"flex"} justifyContent={"center"}>
-        <Paper sx={{ width: "100%" }}>
-          <Box
-            width={"80%"}
-            display={"flex"}
-            justifyContent={"end"}
-            padding={2}
-            maxWidth={"1200px"}
-          >
-            <Button variant="contained">Get Quatation</Button>
-          </Box>
-        </Paper>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
         <Box
+          width={"95%"}
+          display={"flex"}
+          justifyContent={"end"}
+          position={"sticky"}
+          padding={2}
+          top={64}
+          left={0}
+          bgcolor={"#fff"}
+          zIndex={10}
+        >
+          <Paper sx={{ width: "100%" }}>
+            <Button
+              onClick={handleAddHotel}
+              sx={{ margin: 2 }}
+              size="small"
+              variant="contained"
+            >
+              <HotelIcon sx={{ margin: 1 }} />
+              Add Hotel
+            </Button>
+            <Button
+              onClick={handleAddTransport}
+              sx={{ margin: 2 }}
+              size="small"
+              variant="contained"
+            >
+              <AirportShuttleIcon sx={{ margin: 1 }} />
+              Add Transport
+            </Button>
+            <Button
+              onClick={handleAddAttraction}
+              sx={{ margin: 2 }}
+              size="small"
+              variant="contained"
+            >
+              <AttractionsIcon sx={{ margin: 1 }} />
+              Add Attraction
+            </Button>
+            <Button
+              sx={{ margin: 2, padding: 2 }}
+              size="small"
+              variant="contained"
+              color="secondary"
+            >
+              Get Price Sheet
+            </Button>
+          </Paper>
+        </Box>
+        <Box
+          marginTop={18}
+          maxWidth={"1200px"}
+          width={"75%"}
           padding={4}
-          sx={{
-            position: "fixed",
-            overflowY: "scroll",
-            width: "80%",
-            height: "60vh",
-            marginTop: 14,
-            maxWidth: "1200px",
-          }}
           bgcolor={"#eff5ff"}
+          display={"flex"}
+          flexDirection={"column"}
         >
           <form onSubmit={handleSubmit(onSubmit)}>
             {fields.map(
@@ -114,13 +160,21 @@ function Page() {
                     handleRemove={handleRemove}
                     group={group}
                   />
+                )) ||
+                (group.type === "attraction" && (
+                  <AttractionForm
+                    register={register}
+                    groupIndex={groupIndex}
+                    handleRemove={handleRemove}
+                    group={group}
+                  />
                 ))
             )}
           </form>
         </Box>
       </Box>
 
-      <SpeedDial
+      {/* <SpeedDial
         ariaLabel="SpeedDial basic example"
         sx={{ position: "absolute", bottom: 16, right: 16 }}
         icon={<SpeedDialIcon />}
@@ -132,7 +186,7 @@ function Page() {
             tooltipTitle={action.name}
           />
         ))}
-      </SpeedDial>
+      </SpeedDial> */}
     </>
   );
 }
