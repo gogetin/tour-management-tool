@@ -24,6 +24,7 @@ import HotelForm from "@/components/packageDetails/HotelForm";
 import TransportForm from "@/components/packageDetails/TransportForm";
 import AttractionForm from "@/components/packageDetails/AttractionForm";
 import Dialog from "@mui/material/Dialog";
+import CostSheet from "@/components/CostSheet";
 
 function Page() {
   function handleAddHotel() {
@@ -86,7 +87,9 @@ function Page() {
   };
   return (
     <>
-      <Dialog fullScreen open={open} onClose={handleClose}></Dialog>
+      <Dialog fullScreen open={open} onClose={handleClose}>
+        <CostSheet onClose={handleClose} />
+      </Dialog>
       <Box
         display={"flex"}
         flexDirection={"column"}

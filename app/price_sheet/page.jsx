@@ -1,14 +1,19 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 function page() {
   return (
-    <table>
-      <tr>
-        <td>Logo</td>
-        <td></td>
-      </tr>
-    </table>
+    <Box>
+      <Box>
+        <Button>Close</Button>
+      </Box>
+      <table>
+        <tr>
+          <td>Logo</td>
+          <td></td>
+        </tr>
+      </table>
+    </Box>
   );
 }
 
