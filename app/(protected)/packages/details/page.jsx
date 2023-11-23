@@ -23,6 +23,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import HotelForm from "@/components/packageDetails/HotelForm";
 import TransportForm from "@/components/packageDetails/TransportForm";
 import AttractionForm from "@/components/packageDetails/AttractionForm";
+import Dialog from "@mui/material/Dialog";
 
 function Page() {
   function handleAddHotel() {
@@ -76,8 +77,16 @@ function Page() {
     // Handle form submission logic here
     console.log(data);
   };
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   return (
     <>
+      <Dialog fullScreen open={open} onClose={handleClose}></Dialog>
       <Box
         display={"flex"}
         flexDirection={"column"}
@@ -128,17 +137,17 @@ function Page() {
               size="small"
               variant="contained"
               color="secondary"
+              onClick={handleClickOpen}
             >
               Get Price Sheet
             </Button>
           </Paper>
         </Box>
         <Box
-          marginTop={18}
+          marginTop={4}
           maxWidth={"1200px"}
           width={"75%"}
           padding={4}
-          bgcolor={"#eff5ff"}
           display={"flex"}
           flexDirection={"column"}
         >
@@ -173,20 +182,6 @@ function Page() {
           </form>
         </Box>
       </Box>
-
-      {/* <SpeedDial
-        ariaLabel="SpeedDial basic example"
-        sx={{ position: "absolute", bottom: 16, right: 16 }}
-        icon={<SpeedDialIcon />}
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-          />
-        ))}
-      </SpeedDial> */}
     </>
   );
 }
