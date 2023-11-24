@@ -18,6 +18,7 @@ import {
   CardActions,
   Button,
   Stack,
+  Badge,
 } from "@mui/material";
 import { useForm, useFieldArray } from "react-hook-form";
 import HotelForm from "@/components/packageDetails/HotelForm";
@@ -94,47 +95,57 @@ function Page() {
         display={"flex"}
         flexDirection={"column"}
         alignItems={"center"}
-        justifyContent={"center"}
+        bgcolor="#f0f0f0"
+        minHeight={"100vh"}
       >
         <Box
           width={"95%"}
           display={"flex"}
           justifyContent={"end"}
           position={"sticky"}
-          padding={2}
+          padding={0}
           top={64}
           left={0}
           bgcolor={"#fff"}
           zIndex={10}
         >
-          <Paper sx={{ width: "100%" }}>
-            <Button
-              onClick={handleAddHotel}
-              sx={{ margin: 2 }}
-              size="small"
-              variant="contained"
-            >
-              <HotelIcon sx={{ margin: 1 }} />
-              Add Hotel
-            </Button>
-            <Button
-              onClick={handleAddTransport}
-              sx={{ margin: 2 }}
-              size="small"
-              variant="contained"
-            >
-              <AirportShuttleIcon sx={{ margin: 1 }} />
-              Add Transport
-            </Button>
-            <Button
-              onClick={handleAddAttraction}
-              sx={{ margin: 2 }}
-              size="small"
-              variant="contained"
-            >
-              <AttractionsIcon sx={{ margin: 1 }} />
-              Add Attraction
-            </Button>
+          <Paper sx={{ display: "flex", width: "100%" }}>
+            <Box margin={2}>
+              <Badge badgeContent={0} color={"error"}>
+                <Button
+                  onClick={handleAddHotel}
+                  size="small"
+                  variant="contained"
+                >
+                  <HotelIcon sx={{ margin: 1 }} />
+                  Add Hotel
+                </Button>
+              </Badge>
+            </Box>
+            <Box sx={{ margin: 2 }}>
+              <Badge badgeContent={0} color={"error"}>
+                <Button
+                  onClick={handleAddTransport}
+                  size="small"
+                  variant="contained"
+                >
+                  <AirportShuttleIcon sx={{ margin: 1 }} />
+                  Add Transport
+                </Button>
+              </Badge>
+            </Box>
+            <Box sx={{ margin: 2 }}>
+              <Badge color={"error"} badgeContent={0}>
+                <Button
+                  onClick={handleAddAttraction}
+                  size="small"
+                  variant="contained"
+                >
+                  <AttractionsIcon sx={{ margin: 1 }} />
+                  Add Attraction
+                </Button>
+              </Badge>
+            </Box>
             <Button
               sx={{ margin: 2, padding: 2 }}
               size="small"
@@ -147,7 +158,7 @@ function Page() {
           </Paper>
         </Box>
         <Box
-          marginTop={4}
+          marginTop={8}
           maxWidth={"1200px"}
           width={"75%"}
           padding={4}
